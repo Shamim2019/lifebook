@@ -1,5 +1,14 @@
-from django .urls import path,include
-from django.conf.urls.static import static
-from django.conf import settings
-from . import views
-from django. contrib.auth.views import LoginView,LogoutView
+from django import forms
+from .models import Image , editprofile
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model=Image
+        fields='__all__'
+        labels={'photo':''}
+
+
+class Editform(forms.ModelForm):
+     class Meta:
+        model=editprofile
+        fields= '__all__'
