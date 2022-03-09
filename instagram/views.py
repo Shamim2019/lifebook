@@ -1,10 +1,10 @@
-from django. shortcutsimport render,redirect
+from django. shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from django. contrib.auth.decorators import User,auth
-from django.contib.auth.decorators import login_required
+from django. contrib.auth.models import User,auth
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,DetailView
 from.models import Image,editprofile
-from . forms import ImageForm, EditForm
+from .forms import ImageForm, EditForm
 
 
 
@@ -13,7 +13,7 @@ def indexView(request):
 
 
 def registerView(request):
-    if request.method =="POST"
+    if request.method == "POST":
        password1=request.POST('password1')
        username=request.POST('username')
 
@@ -23,9 +23,9 @@ def registerView(request):
         return render(request,'registration/register.html')
 
 def dashboardView(request):
-    if request.method == "POST"
+    if request.method == "POST":
        form = ImageForm(request.POST,request.FILES)
-        if form.is_valid():
+    if form.is_valid():
            form.save()
     form = ImageForm()
     img = Image.objects.all()
@@ -34,7 +34,7 @@ def dashboardView(request):
 def like_api(request):
     print(request.POST["image_id"])
     image=Image.objects.get(id=request.POST["image_id"])
-    image.likes.add(equest.user)
+    image.likes.add(request.user)
     return redirect('dashboard')
 
 def unlike_api(request):
@@ -45,13 +45,14 @@ def unlike_api(request):
     return redirect('dashboard')
 
 def homeView(request):
-    img=image.objects.all()  
+    img= img.objects.all()  
     obj = editprofile.objects.all()
     return render(request,'profile.html',{'img':img,'obj':obj}) 
 
 def editView(request):
     if request.method =="POST":
         form=EditForm(request.POST,request.FILES)
-        if form.is_valid():
-    form = EditForm()
-    return render(request,'editprofile.html,'{'form':form})        
+        
+    if form.is_valid():
+        form = EditForm()
+    return render (request,'editprofile.html',{'form':form})        

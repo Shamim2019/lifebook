@@ -8,7 +8,7 @@ class ImageForm(forms.ModelForm):
         labels={'photo':''}
 
 
-class Editform(forms.ModelForm):
+class EditForm(forms.ModelForm):
      class Meta:
         model=editprofile
         fields= '__all__'
